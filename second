@@ -1,0 +1,179 @@
+mysql> create table courses(
+    -> student VARCHAR(1) NOT NULL,
+    -> class VARCHAR(20) NOT NULL
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> INSERT INTO courses
+    -> VALUES ("A", "Math");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO courses
+    -> VALUES ("B", "English");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO courses
+    -> VALUES ("C", "Math");
+Query OK, 1 row affected (0.00 sec)
+
+mysql>
+mysql> INSERT INTO courses
+    -> VALUES ("C", "Math");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO courses
+    -> VALUES ("D", "Biology");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO courses
+    -> VALUES ("E", "Math");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO courses
+    -> VALUES ("F", "Computer");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO courses
+    -> VALUES ("G", "Math");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO courses
+    -> VALUES ("H", "Math");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO courses
+    -> VALUES ("I", "Math");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO courses
+    -> VALUES ("A", "Math");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select class from courses
+    -> ^C
+mysql> select class
+    -> from courses
+    -> group by class
+    -> having count(distinct student)>=5;
+    
++-------+
+| class |
++-------+
+| Math  |
++-------+
+1 row in set (0.00 sec)
+
+
+mysql> CREATE TABLE IF NOT EXISTS salary (
+    -> id int NOT NULL primary key,
+    -> name VARCHAR(20) NOT NULL,
+    -> sex VARCHAR(1) NOT NULL,
+    -> salary int NOT NULL
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> INSERT INTO salary
+    -> VALUES ("1", "A", "m", "2500");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO salary
+    -> VALUES ("2", "B", "f", "1500");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO salary
+    -> VALUES ("3", "C", "m", "5500");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO salary
+    -> VALUES ("4", "D", "f", "500");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> update salary
+    -> set sex=case sex
+    -> when 'm'then'f'
+    -> when'f'then'm'
+    -> end ;
+Query OK, 4 rows affected (0.00 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+
+mysql> select* from salary;
++----+------+-----+--------+
+| id | name | sex | salary |
++----+------+-----+--------+
+|  1 | A    | f   |   2500 |
+|  2 | B    | m   |   1500 |
+|  3 | C    | f   |   5500 |
+|  4 | D    | m   |    500 |
++----+------+-----+--------+
+4 rows in set (0.00 sec)
+
+mysql> INSERT INTO cinema
+    -> VALUES ('3', 'irish', 'boring', '6.2');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO cinema
+    -> VALUES ('4', 'Ice song', 'Fantacy', '8.6');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO cinema
+    -> VALUES ('5', 'House card', 'Interesting', '9.1');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT id, movie, description, rating
+    -> FROM cinema
+    -> WHERE description != 'boring'
+    -> AND id % 2 != 0
+    -> ORDER BY rating;
++----+------------+-------------+--------+
+| id | movie      | description | rating |
++----+------------+-------------+--------+
+|  1 | War        | great 3D    |    8.9 |
+|  5 | House card | Interesting |    9.1 |
++----+------------+-------------+--------+
+2 rows in set (0.00 sec)
+
+
+CREATE TABLE IF NOT EXISTS Person (
+	Personid int NOT NULL PRIMARY KEY ,
+	Firstname VARCHAR(20) NOT NULL,
+	Lastname VARCHAR(20) NOT NULL,
+);
+
+CREATE TABLE IF NOT EXISTS Address (
+	AddressId int NOT NULL PRIMARY KEY,
+	Personid int NOT NULL,
+	City VARCHAR(20) NOT NULL,
+	State VARCHAR(20) NOT NULL,
+);
+
+INSERT INTO Person
+VALUES ('1', 'smith', 'swift');
+
+INSERT INTO Person
+VALUES ('2', 'luna', 'chiu');
+
+INSERT INTO Person
+VALUES ('3', 'tia', 'shi');
+
+INSERT INTO Address
+VALUES ('11', '1', 'SZ', 'GD');
+
+INSERT INTO Address
+VALUES ('12', '2', 'CD', 'SC');
+
+INSERT INTO Address
+VALUES ('13', '3', 'KM', 'YN');
+
+SELECT FirstName, LastName, City, State
+FROM Address, Person
+WHERE person.Personid = address.Personid;
++-----------+----------+------+-------+
+| FirstName | LastName | City | State |
++-----------+----------+------+-------+
+| smith     | swift    | SZ   | GD    |
+| luna      | chiu     | CD   | SC    |
+| tia       | shi      | KM   | YN    |
++-----------+----------+------+-------+
+3 rows in set (0.01 sec)
+
+
